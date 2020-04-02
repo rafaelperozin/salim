@@ -6,8 +6,4 @@ Mobile app for IOS and Android.
 
 **Used**: ReactNative | SQLite | Express | KnexJs | Jest TDD
 
-![](https://github.com/rafaelperozin/salim/blob/master/templates/splash.jpeg?raw=true)
-![](https://github.com/rafaelperozin/salim/blob/master/templates/budget.jpeg?raw=true)
-![](https://github.com/rafaelperozin/salim/blob/master/templates/cashflow-2.jpeg?raw=true)
-![](https://github.com/rafaelperozin/salim/blob/master/templates/cashflow-1.jpeg?raw=true)
-![](https://github.com/rafaelperozin/salim/blob/master/templates/new-transaction.jpeg?raw=true)
+![Salim App Templates](https://github.com/rafaelperozin/salim/blob/master/templates/salim-templates.jpg?raw=true)
