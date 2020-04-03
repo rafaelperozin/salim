@@ -22,7 +22,7 @@ routes.route('/update/:id').put(UserController.update);
 routes.route('/delete/:id').delete(UserController.delete);
 
 // Create
-routes.route('/register').post(UserController.create);
+routes.route('/new').post(UserController.create);
     //    return  routes.post('/ongs', celebrate({
     //         [Segments.BODY]: Joi.object().keys({
     //             name: Joi.string().required(),

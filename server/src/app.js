@@ -9,7 +9,9 @@ app.use(express.json());
 
 // ROUTES
 const user = require('./routes/user');
+const budget = require('./routes/budget');
 app.use("/api/user", user);
+app.use("/api/budget", budget);
 
 app.use(errors());
 

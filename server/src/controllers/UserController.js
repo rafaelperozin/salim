@@ -101,7 +101,7 @@ module.exports = {
             .where('id', id)
             .first();
     
-        if (user.id !== id) {
+        if (!user) {
             return res.status(400).json({
                 error: 'Invalid User.'
             });
