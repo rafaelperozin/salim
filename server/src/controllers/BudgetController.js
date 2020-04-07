@@ -1,65 +1,78 @@
+const upperCaseAllFirstLetter = require('../utils/upperCaseAllFirstLetter');
 const connection = require('../database/connection');
 
+async function checkAuthorization(user_id) {
+    if (user_id) {
+        const user = await connection('user')
+            .where('id', user_id)
+            .first();
+        if (!user) {
+            return res.status(401).json({
+                error: 'Operation not permitted.'
+            });
+        }
+    } else {
+        return res.status(401).json({
+            error: 'Operation not permitted.'
+        });
+    }
+}
+
 module.exports = {
-    // async index(req, res) {
-    //     // Authorized?
-    //     const masterAuth = req.headers.masterauth;
+    async index(req, res) {
+        const user_id = req.headers.authorization;
+        checkAuthorization(user_id);
 
-    //     if (masterAuth !== 'salim') {
-    //         return res.status(401).json({
-    //             error: 'Operation not permitted.'
-    //         });
-    //     }
-
-    //     const user = await connection('user').select('*');
-    //     return res.json(user);
-    // },
+        const budgets = await connection('budget')
+            .where('user_id', user_id)
+            .select('*');
+        return res.json(budgets);
+    },
     async create(req, res) {
-        const {
+        let {
             title,
             budget,
-            status
+            status,
+            saving
         } = req.body;
 
-        // User already in the app?
-        const usedMobile = await connection('user')
-            .where('mobile', mobile)
+        const user_id = req.headers.authorization;
+
+        checkAuthorization(user_id);
+
+        title = title.toLowerCase();
+
+        // User already in the app for this user?
+        const budgetTitle = await connection('budget')
+            .where('title', title)
+            .andWhere('user_id', user_id)
             .first();
-    
-        if (usedMobile) {
+        if (budgetTitle) {
             return res.status(412).json({
-                error: `Already exist a user with this mobile number: ${mobile}`
+                error: `Already exist a budget with title "${upperCaseAllFirstLetter(title)}" for this user`
             });
         }
 
-        const id = generateUniqueId();
-
-        await connection('user').insert({
-            id,
-            name,
-            mobile,
-            city,
-            country,
+        const [id] = await connection('budget').insert({
+            title,
+            budget,
+            status,
+            saving,
+            user_id
         });
 
         return res.json({ id });
     },
-    // async get(req, res) {
-    //     const { id } = req.params;
+    async get(req, res) {
+        const { id } = req.params;
+        const user_id = req.headers.authorization;
+        checkAuthorization(user_id);
 
-    //     // Authorized?
-    //     const masterAuth = req.headers.masterauth;
-
-    //     if (masterAuth !== 'salim') {
-    //         return res.status(401).json({
-    //             error: 'Operation not permitted.'
-    //         });
-    //     }
-
-    //     const user = await connection('user')
-    //         .where('id', id);
-    //     return res.json(user);
-    // },
+        const budget = await connection('budget')
+            .where('id', id)
+            .andWhere('user_id', user_id);
+        return res.json(budget);
+    },
     // async update(req, res) {
     //     const { id } = req.params;
         

@@ -5,10 +5,10 @@ const BudgetController = require('../controllers/BudgetController');
 const routes = express.Router();
 
 // List
-// routes.route('/').get(BudgetController.index);
+routes.route('/').get(BudgetController.index);
 
 // Specific
-// routes.route('/:id').get(BudgetController.get);
+routes.route('/:id').get(BudgetController.get);
 
 // Update
 // routes.route('/update/:id').put(BudgetController.update);

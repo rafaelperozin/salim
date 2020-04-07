@@ -5,6 +5,10 @@ exports.up = function(knex) {
         table.string('title').notNullable();
         table.decimal('budget').notNullable();
         table.string('status').notNullable();
+        table.string('saving').nullable();
+
+        table.string('user_id').notNullable();
+        table.foreign('user_id').references('id').inTable('user');
     });
 };
 
