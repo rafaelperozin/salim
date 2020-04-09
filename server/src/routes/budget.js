@@ -13,8 +13,8 @@ routes.route('/:id').get(BudgetController.get);
 // Update
 routes.route('/update/:id').put(BudgetController.update);
 
-// Change Status
-routes.route('/:status/:id').put(BudgetController.status);
+// Delete
+routes.route('/delete/:id').delete(BudgetController.delete);
 
 // Create
 routes.route('/new').post(BudgetController.create);

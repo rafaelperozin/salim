@@ -1,18 +1,14 @@
 const generateUniqueId = require('../utils/generateUniqueId');
+const checkAuthMaster = require('../utils/checkAuthMaster');
 const connection = require('../database/connection');
 
 module.exports = {
     async index(req, res) {
-        // Authorized?
         const masterAuth = req.headers.masterauth;
-
-        if (masterAuth !== 'salim') {
-            return res.status(401).json({
-                error: 'Operation not permitted.'
-            });
-        }
+        checkAuthMaster(masterAuth, res);
 
         const user = await connection('user').select('*');
+        
         return res.json(user);
     },
     async create(req, res) {
@@ -49,17 +45,9 @@ module.exports = {
     async get(req, res) {
         const { id } = req.params;
 
-        // Authorized?
-        const masterAuth = req.headers.masterauth;
-
-        if (masterAuth !== 'salim') {
-            return res.status(401).json({
-                error: 'Operation not permitted.'
-            });
-        }
-
         const user = await connection('user')
             .where('id', id);
+        
         return res.json(user);
     },
     async update(req, res) {
@@ -87,25 +75,10 @@ module.exports = {
     async delete(req, res) {
         const { id } = req.params;
         
-        // Authorized?
         const masterAuth = req.headers.masterauth;
+        checkAuthMaster(masterAuth, res);
 
-        if (masterAuth !== 'salim') {
-            return res.status(401).json({
-                error: 'Operation not permitted.'
-            });
-        }
-
-        // Valid id?
-        const user = await connection('user')
-            .where('id', id)
-            .first();
-    
-        if (!user) {
-            return res.status(400).json({
-                error: 'Invalid User.'
-            });
-        }
+        checkId('user', res, id);
 
         await connection('user').where('id', id).delete();
 

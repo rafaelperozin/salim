@@ -63,17 +63,30 @@ module.exports = {
     },
     async update(req, res) {
         const { id } = req.params;
+        let {
+            title,
+            budget,
+            status
+        } = req.body;
 
         const user_id = req.headers.authorization;
         checkAuthorization(user_id, res);
 
         checkId('budget', res, id, user_id);
-        
-        const {
-            title,
-            budget,
-            status
-        } = req.body;
+
+        title = title.toLowerCase();
+
+        // User already in the app for this user?
+        const budgetTitle = await connection('budget')
+            .where('title', title)
+            .andWhereNot('id', id)
+            .andWhere('user_id', user_id)
+            .first();
+        if (budgetTitle) {
+            return res.status(412).json({
+                error: `Already exist a budget with title "${upperCaseAllFirstLetter(title)}" for this user`
+            });
+        }
 
         await connection('budget')
             .where('id', id)
@@ -86,24 +99,16 @@ module.exports = {
         
         return res.status(204).send();
     },
-    async status(req, res) {
-        const { id, status } = req.params;
-
+    async delete(req, res) {
+        const { id } = req.params;
+        
         const user_id = req.headers.authorization;
         checkAuthorization(user_id, res);
 
-        checkId('budget', res, id, user_id);
+        checkId('budget', res, id);
 
-        if (status !== 'active' && status !== 'inactive' ) {
-            return res.status(401).json({
-                error: 'Invalid status value.'
-            });
-        }
+        await connection('budget').where('id', id).delete();
 
-        await connection('budget')
-            .where('id', id)
-            .update({ status });
-        
         return res.status(204).send();
     }
 };
