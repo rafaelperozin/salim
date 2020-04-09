@@ -11,10 +11,10 @@ routes.route('/').get(BudgetController.index);
 routes.route('/:id').get(BudgetController.get);
 
 // Update
-// routes.route('/update/:id').put(BudgetController.update);
+routes.route('/update/:id').put(BudgetController.update);
 
 // Change Status
-// routes.route('/:status/:id').put(BudgetController.status);
+routes.route('/:status/:id').put(BudgetController.status);
 
 // Create
 routes.route('/new').post(BudgetController.create);

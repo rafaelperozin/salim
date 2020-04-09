@@ -1,31 +1,17 @@
 const upperCaseAllFirstLetter = require('../utils/upperCaseAllFirstLetter');
+const checkAuthorization = require('../utils/checkAuthorization');
+const checkId = require('../utils/checkId');
 const connection = require('../database/connection');
-
-async function checkAuthorization(user_id) {
-    if (user_id) {
-        const user = await connection('user')
-            .where('id', user_id)
-            .first();
-        if (!user) {
-            return res.status(401).json({
-                error: 'Operation not permitted.'
-            });
-        }
-    } else {
-        return res.status(401).json({
-            error: 'Operation not permitted.'
-        });
-    }
-}
 
 module.exports = {
     async index(req, res) {
         const user_id = req.headers.authorization;
-        checkAuthorization(user_id);
+        checkAuthorization(user_id, res);
 
         const budgets = await connection('budget')
             .where('user_id', user_id)
             .select('*');
+        
         return res.json(budgets);
     },
     async create(req, res) {
@@ -38,7 +24,7 @@ module.exports = {
 
         const user_id = req.headers.authorization;
 
-        checkAuthorization(user_id);
+        checkAuthorization(user_id, res);
 
         title = title.toLowerCase();
 
@@ -65,61 +51,59 @@ module.exports = {
     },
     async get(req, res) {
         const { id } = req.params;
+        
         const user_id = req.headers.authorization;
-        checkAuthorization(user_id);
+        checkAuthorization(user_id, res);
 
-        const budget = await connection('budget')
-            .where('id', id)
-            .andWhere('user_id', user_id);
+        checkId('budget', res, id, user_id);
+
+        const budget = await connection('budget').where('id', id);
+        
         return res.json(budget);
     },
-    // async update(req, res) {
-    //     const { id } = req.params;
+    async update(req, res) {
+        const { id } = req.params;
+
+        const user_id = req.headers.authorization;
+        checkAuthorization(user_id, res);
+
+        checkId('budget', res, id, user_id);
         
-    //     const {
-    //         name,
-    //         mobile,
-    //         city,
-    //         country
-    //     } = req.body;
+        const {
+            title,
+            budget,
+            status
+        } = req.body;
 
-    //     await connection('user')
-    //         .where('id', id)
-    //         .update({
-    //             id,
-    //             name,
-    //             mobile,
-    //             city,
-    //             country,
-    //         });
+        await connection('budget')
+            .where('id', id)
+            .update({
+                id,
+                title,
+                budget,
+                status
+            });
         
-    //     return res.status(204).send();
-    // },
-    // async delete(req, res) {
-    //     const { id } = req.params;
+        return res.status(204).send();
+    },
+    async status(req, res) {
+        const { id, status } = req.params;
+
+        const user_id = req.headers.authorization;
+        checkAuthorization(user_id, res);
+
+        checkId('budget', res, id, user_id);
+
+        if (status !== 'active' && status !== 'inactive' ) {
+            return res.status(401).json({
+                error: 'Invalid status value.'
+            });
+        }
+
+        await connection('budget')
+            .where('id', id)
+            .update({ status });
         
-    //     // Authorized?
-    //     const masterAuth = req.headers.masterauth;
-
-    //     if (masterAuth !== 'salim') {
-    //         return res.status(401).json({
-    //             error: 'Operation not permitted.'
-    //         });
-    //     }
-
-    //     // Valid id?
-    //     const user = await connection('user')
-    //         .where('id', id)
-    //         .first();
-    
-    //     if (!user) {
-    //         return res.status(400).json({
-    //             error: 'Invalid User.'
-    //         });
-    //     }
-
-    //     await connection('user').where('id', id).delete();
-
-    //     return res.status(204).send();
-    // }
+        return res.status(204).send();
+    }
 };
