@@ -103,7 +103,7 @@ module.exports = {
         const user_id = req.headers.authorization;
         checkAuthorization(user_id, res);
 
-        checkId('budget', res, id);
+        checkId('budget', res, id, user_id);
 
         await connection('budget').where('id', id).delete();
 
