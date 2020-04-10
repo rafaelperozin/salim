@@ -1,5 +1,5 @@
 const generateUniqueId = require('../utils/generateUniqueId');
-const checkAuthMaster = require('../utils/checkAuthMaster');
+const checkAuthMaster = require('../validations/checkAuthMaster');
 const connection = require('../database/connection');
 
 module.exports = {

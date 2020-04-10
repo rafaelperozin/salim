@@ -4,7 +4,6 @@ exports.up = function(knex) {
         table.increments();
         table.string('title').notNullable();
         table.decimal('budget').notNullable();
-        table.string('status').notNullable();
         table.string('saving').nullable();
 
         table.string('user_id').notNullable();

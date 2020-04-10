@@ -1,6 +1,6 @@
 const upperCaseAllFirstLetter = require('../utils/upperCaseAllFirstLetter');
-const checkAuthorization = require('../utils/checkAuthorization');
-const checkId = require('../utils/checkId');
+const checkAuthorization = require('../validations/checkAuthorization');
+const checkId = require('../validations/checkId');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -18,7 +18,6 @@ module.exports = {
         let {
             title,
             budget,
-            status,
             saving
         } = req.body;
 
@@ -42,7 +41,6 @@ module.exports = {
         const [id] = await connection('budget').insert({
             title,
             budget,
-            status,
             saving,
             user_id
         });
@@ -66,7 +64,7 @@ module.exports = {
         let {
             title,
             budget,
-            status
+            saving
         } = req.body;
 
         const user_id = req.headers.authorization;
@@ -94,7 +92,7 @@ module.exports = {
                 id,
                 title,
                 budget,
-                status
+                saving
             });
         
         return res.status(204).send();
