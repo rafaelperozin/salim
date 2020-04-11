@@ -1,12 +1,22 @@
-// const upperCaseAllFirstLetter = require('../utils/upperCaseAllFirstLetter');
-const checkAuthorization = require('../validations/checkAuthorization');
-const checkId = require('../validations/checkId');
 const connection = require('../database/connection');
 
 module.exports = {
     async index(req, res) {
         const user_id = req.headers.authorization;
-        checkAuthorization(user_id, res);
+        if (user_id) {
+            const user = await connection('user')
+                .where('id', user_id)
+                .first();
+            if (!user) {
+                return res.status(401).json({
+                    error: 'Operation not permitted.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: 'Operation not permitted.'
+            });
+        }
 
         const transactions = await connection('transaction')
             .where('user_id', user_id)
@@ -26,15 +36,47 @@ module.exports = {
 
         const user_id = req.headers.authorization;
 
-        checkAuthorization(user_id, res);
+        if (user_id) {
+            const user = await connection('user')
+                .where('id', user_id)
+                .first();
+            if (!user) {
+                return res.status(401).json({
+                    error: 'Operation not permitted.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: 'Operation not permitted.'
+            });
+        }
 
-        checkId('budget', res, budget_id, user_id);
+        if (budget_id) {
+            let validId;
+            if (user_id) {
+                validId = await connection('budget')
+                    .where('id', budget_id)
+                    .andWhere('user_id', user_id)
+                    .first()
+            } else {
+                validId = await connection('budget')
+                    .where('id', budget_id)
+                    .first();            
+            }
+            if (validId == undefined) {
+                return res.status(401).json({
+                    error: 'Invalid ID for this user.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: `The ${db_table} ID is required.`
+            });
+        }
 
         type = type.toLowerCase();
         title = title.toLowerCase();
         status = status.toLowerCase();
-        const dateValue = date.split('-');
-        date = `${dateValue[2]}-${dateValue[1]}-${dateValue[0]}`;
 
         const [id] = await connection('transaction').insert({
             type,
@@ -52,9 +94,43 @@ module.exports = {
         const { id } = req.params;
         
         const user_id = req.headers.authorization;
-        checkAuthorization(user_id, res);
+        if (user_id) {
+            const user = await connection('user')
+                .where('id', user_id)
+                .first();
+            if (!user) {
+                return res.status(401).json({
+                    error: 'Operation not permitted.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: 'Operation not permitted.'
+            });
+        }
 
-        checkId('transaction', res, id, user_id);
+        if (id) {
+            let validId;
+            if (user_id) {
+                validId = await connection('transaction')
+                    .where('id', id)
+                    .andWhere('user_id', user_id)
+                    .first()
+            } else {
+                validId = await connection('transaction')
+                    .where('id', id)
+                    .first();            
+            }
+            if (validId == undefined) {
+                return res.status(401).json({
+                    error: 'Invalid ID for this user.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: `The ${db_table} ID is required.`
+            });
+        }
 
         const transactions = await connection('transaction').where('id', id);
         
@@ -72,17 +148,70 @@ module.exports = {
         } = req.body;
 
         const user_id = req.headers.authorization;
-        checkAuthorization(user_id, res);
+        if (user_id) {
+            const user = await connection('user')
+                .where('id', user_id)
+                .first();
+            if (!user) {
+                return res.status(401).json({
+                    error: 'Operation not permitted.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: 'Operation not permitted.'
+            });
+        }
 
-        checkId('transaction', res, id, user_id);
+        if (id) {
+            let validId;
+            if (user_id) {
+                validId = await connection('transaction')
+                    .where('id', id)
+                    .andWhere('user_id', user_id)
+                    .first()
+            } else {
+                validId = await connection('transaction')
+                    .where('id', id)
+                    .first();            
+            }
+            if (validId == undefined) {
+                return res.status(401).json({
+                    error: 'Invalid ID for this user.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: `The ${db_table} ID is required.`
+            });
+        }
 
-        checkId('budget', res, budget_id, user_id);
+        if (budget_id) {
+            let validId;
+            if (user_id) {
+                validId = await connection('budget')
+                    .where('id', budget_id)
+                    .andWhere('user_id', user_id)
+                    .first()
+            } else {
+                validId = await connection('budget')
+                    .where('id', budget_id)
+                    .first();            
+            }
+            if (validId == undefined) {
+                return res.status(401).json({
+                    error: 'Invalid ID for this user.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: `The ${db_table} ID is required.`
+            });
+        }
 
         type = type.toLowerCase();
         title = title.toLowerCase();
         status = status.toLowerCase();
-        const dateValue = date.split('-');
-        date = `${dateValue[2]}-${dateValue[1]}-${dateValue[0]}`;
 
         await connection('transaction')
             .where('id', id)
@@ -103,9 +232,43 @@ module.exports = {
         const { id } = req.params;
         
         const user_id = req.headers.authorization;
-        checkAuthorization(user_id, res);
+        if (user_id) {
+            const user = await connection('user')
+                .where('id', user_id)
+                .first();
+            if (!user) {
+                return res.status(401).json({
+                    error: 'Operation not permitted.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: 'Operation not permitted.'
+            });
+        }
 
-        checkId('transaction', res, id, user_id);
+        if (id) {
+            let validId;
+            if (user_id) {
+                validId = await connection('transaction')
+                    .where('id', id)
+                    .andWhere('user_id', user_id)
+                    .first()
+            } else {
+                validId = await connection('transaction')
+                    .where('id', id)
+                    .first();            
+            }
+            if (validId == undefined) {
+                return res.status(401).json({
+                    error: 'Invalid ID for this user.'
+                });
+            }
+        } else {
+            return res.status(401).json({
+                error: `The ${db_table} ID is required.`
+            });
+        }
 
         await connection('transaction').where('id', id).delete();
 

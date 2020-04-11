@@ -2,7 +2,7 @@
 ## Personal Finance Controller
 Mobile app for IOS and Android.
 
-**Author**: Rafael Perozin
+**Author, designer and developer**: Rafael Perozin
 
 **Used**: ReactNative | SQLite | Express | KnexJs | Jest TDD
 
