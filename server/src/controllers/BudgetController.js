@@ -62,7 +62,8 @@ module.exports = {
                             "id": item.id,
                             "title": item.title,
                             "budget": item.budget,
-                            "saving": item.saving,
+                            "budget": item.budget,
+                            "total": 0,
                             "user_id": item.user_id,
                             "transactions": [{
                                 "id": item.tid,
@@ -81,6 +82,8 @@ module.exports = {
                         const key = acc.length - 1;
                         // Just for the first item
                         if (acc.length === 0) {
+                            // calculate total
+                            cur['total'] += cur['transactions'][0]['value'];
                             // Show empty transaction array if no transaction
                             const transArray = (cur['transactions'][0]['id'] != null) ? [{
                                 "id": cur['transactions'][0]['id'],
@@ -95,6 +98,7 @@ module.exports = {
                                 "id": cur['id'],
                                 "title": cur['title'],
                                 "budget": cur['budget'],
+                                "total": cur['total'],
                                 "saving": cur['saving'],
                                 "user_id": cur['user_id'],
                                 "transactions": transArray
@@ -105,8 +109,12 @@ module.exports = {
                                 // prevent duplicated data and only add the transaction
                                 // to the last budget
                                 acc[key]['transactions'].push(cur['transactions'][0]);
+                                // calculate total
+                                acc[key]['total'] += cur['transactions'][0]['value'];
                             }
                             else {
+                                // calculate total
+                                if (cur['transactions'][0]['value'] !== null) cur['total'] += cur['transactions'][0]['value'];
                                 // Show empty transaction array if no transaction
                                 if (cur['transactions'][0]['id'] === null) cur['transactions'] = [];
                                 // create a new position in the array when id and user_id don't match
