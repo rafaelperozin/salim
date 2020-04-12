@@ -41,31 +41,83 @@ module.exports = {
                 .andOn('transaction.user_id', '=', 'budget.user_id')
             })
             .where('budget.user_id', user_id)
-            .then(function (data) {                
-                return _.chain(data)
-                    .groupBy(function (budget) {
-                        return budget.id;
-                    })
-                    .map(function (budgets) {
-                        const budget = _.chain(budgets)
-                            .first()
-                            .pick('id', 'title', 'budget', 'saving', 'user_id', 'transactions');
-                        const budget_transactions = _.map(budgets, function (b) {
-                            return {
-                                'id': b.tid,
-                                'type': b.type,
-                                'title': b.ttitle,
-                                'value': b.value,
-                                'date': b.date,
-                                'status': b.status
+            .then(function (data) {
+                // sort by id
+                function compare(a, b) {
+                    const idA = a.id;
+                    const idB = b.id;
+                    
+                    let comparison = 0;
+                    if (idA > idB) {
+                        comparison = 1;
+                    } else if (idA < idB) {
+                        comparison = -1;
+                    }
+                    return comparison;
+                }
+                // after sort by id, map to structure the data
+                const newData = data.sort(compare)
+                    .map(item => {
+                        return budgetItem = {
+                            "id": item.id,
+                            "title": item.title,
+                            "budget": item.budget,
+                            "saving": item.saving,
+                            "user_id": item.user_id,
+                            "transactions": [{
+                                "id": item.tid,
+                                "type": item.type,
+                                "title": item.ttitle,
+                                "value": item.value,
+                                "date": item.date,
+                                "status": item.status,
+                            }]
+                        }
+                    });
+                // group by ID and User_ID
+                function groupBy(objectArray, prop1, prop2) {
+                    return objectArray.reduce(function (acc, cur, index) {
+                        // set key as last position(index) in the array
+                        const key = acc.length - 1;
+                        // Just for the first item
+                        if (acc.length === 0) {
+                            // Show empty transaction array if no transaction
+                            const transArray = (cur['transactions'][0]['id'] != null) ? [{
+                                "id": cur['transactions'][0]['id'],
+                                "type": cur['transactions'][0]['type'],
+                                "title": cur['transactions'][0]['title'],
+                                "value": cur['transactions'][0]['value'],
+                                "date": cur['transactions'][0]['date'],
+                                "status": cur['transactions'][0]['status'],
+                            }] : [];
+                            // structure the data
+                            acc[0] = {
+                                "id": cur['id'],
+                                "title": cur['title'],
+                                "budget": cur['budget'],
+                                "saving": cur['saving'],
+                                "user_id": cur['user_id'],
+                                "transactions": transArray
                             };
-                        });
-                        budget.transactions = budget_transactions;
-                        return budget;
-                    })
-                    .value();
+                        } else {
+                            // check id and user id
+                            if (acc[key][prop1] === cur[prop1] && acc[key][prop2] === cur[prop2]) {
+                                // prevent duplicated data and only add the transaction
+                                // to the last budget
+                                acc[key]['transactions'].push(cur['transactions'][0]);
+                            }
+                            else {
+                                // Show empty transaction array if no transaction
+                                if (cur['transactions'][0]['id'] === null) cur['transactions'] = [];
+                                // create a new position in the array when id and user_id don't match
+                                acc.push(cur);
+                            }
+                        }
+                        return acc;
+                    }, []);
+                }
+                return groupBy(newData, 'id', 'user_id');
             });
-        console.log(budgets);
         
         return res.json(budgets);
     },
