@@ -23,7 +23,7 @@ module.exports = async function (req, res) {
         month = m,
         year = y
     } = req.query;
-
+    
     if (Number(year) > y
         || (Number(year) == y && Number(month) > m)
         || Number(month) <= 0
@@ -35,12 +35,8 @@ module.exports = async function (req, res) {
         });
     }
 
-    let firstDay = new Date(Number(year), Number(month) - 1, 0).toJSON().split("T")[0];
-    let lastDay = new Date(Number(year), Number(month), 2).toJSON().split("T")[0];
-
-    console.log(firstDay);
-    console.log(lastDay);
-    
+    let firstDay = year + '-' + (Number(month) < 10 ? + '0' + month : month) + '-01';
+    let lastDay = year + '-' + (Number(month) < 10 ? + '0' + month : month) + '-31';
 
     const budgets = await connection('budget')
         .select(

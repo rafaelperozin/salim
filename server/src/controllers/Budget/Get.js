@@ -42,6 +42,26 @@ module.exports = async function (req, res) {
         });
     }
 
+    const d = new Date(), m = d.getMonth() + 1, y = d.getFullYear();
+    const {
+        month = m,
+        year = y
+    } = req.query;
+    
+    if (Number(year) > y
+        || (Number(year) == y && Number(month) > m)
+        || Number(month) <= 0
+        || Number(month) > 12
+        || Number(year) < 2020)
+    {
+        return res.status(400).json({
+            error: 'Invalid date.'
+        });
+    }
+
+    let firstDay = year + '-' + (Number(month) < 10 ? + '0' + month : month) + '-01';
+    let lastDay = year + '-' + (Number(month) < 10 ? + '0' + month : month) + '-31';
+
     const budget = await connection('budget')
             .select(
                 'budget.id as id',
@@ -61,6 +81,7 @@ module.exports = async function (req, res) {
                     .andOn('transaction.user_id', '=', 'budget.user_id')
             })
             .where('budget.id', id)
+            .whereBetween('transaction.date', [firstDay, lastDay])
             .then(function (data) {
                 // sort by id
                 function compare(a, b) {
