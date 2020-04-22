@@ -35,8 +35,8 @@ module.exports = async function (req, res) {
         });
     }
 
-    let firstDay = year + '-' + (Number(month) < 10 ? + '0' + month : month) + '-01';
-    let lastDay = year + '-' + (Number(month) < 10 ? + '0' + month : month) + '-31';
+    let firstDay = year + '-' + (Number(month) < 10 ? + '0' + month.toString() : month) + '-01';
+    let lastDay = year + '-' + (Number(month) < 10 ? + '0' + month.toString() : month) + '-31';
 
     const budgets = await connection('budget')
         .select(

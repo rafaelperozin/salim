@@ -18,8 +18,29 @@ module.exports = {
             });
         }
 
+        const d = new Date(), m = d.getMonth() + 1, y = d.getFullYear();
+        const {
+            month = m,
+            year = y
+        } = req.query;
+        
+        if (Number(year) > y
+            || (Number(year) == y && Number(month) > m)
+            || Number(month) <= 0
+            || Number(month) > 12
+            || Number(year) < 2020)
+        {
+            return res.status(400).json({
+                error: 'Invalid date.'
+            });
+        }
+
+        let firstDay = year + '-' + (Number(month) < 10 ? + '0' + month.toString() : month) + '-01';
+        let lastDay = year + '-' + (Number(month) < 10 ? + '0' + month.toString() : month) + '-31';
+
         const transactions = await connection('transaction')
             .where('user_id', user_id)
+            .whereBetween('date', [firstDay, lastDay])
             .select('*');
         
         return res.json(transactions);
