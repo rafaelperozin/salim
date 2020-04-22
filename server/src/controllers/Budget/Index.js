@@ -38,6 +38,10 @@ module.exports = async function (req, res) {
     let firstDay = new Date(Number(year), Number(month) - 1, 0).toJSON().split("T")[0];
     let lastDay = new Date(Number(year), Number(month), 2).toJSON().split("T")[0];
 
+    console.log(firstDay);
+    console.log(lastDay);
+    
+
     const budgets = await connection('budget')
         .select(
             'budget.id as id',
@@ -78,7 +82,6 @@ module.exports = async function (req, res) {
                     return budgetItem = {
                         "id": item.id,
                         "title": item.title,
-                        "budget": item.budget,
                         "budget": item.budget,
                         "total": 0,
                         "user_id": item.user_id,

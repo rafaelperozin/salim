@@ -74,6 +74,13 @@ module.exports = {
             });
         }
 
+        const dateReg = /[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/;
+        if (!date.match(dateReg)) {
+            return res.status(400).json({
+                error: 'Invalid date format.'
+            });
+        }
+
         type = type.toLowerCase();
         title = title.toLowerCase();
         status = status.toLowerCase();
