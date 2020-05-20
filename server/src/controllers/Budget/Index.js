@@ -1,22 +1,11 @@
+const checkAuthorization = require('../../validations/checkAuthorization');
 const connection = require('../../database/connection');
 
 module.exports = async function (req, res) {
     
     const user_id = req.headers.authorization;
-    if (user_id) {
-        const user = await connection('user')
-            .where('id', user_id)
-            .first();
-        if (!user) {
-            return res.status(401).json({
-                error: 'Operation not permitted.'
-            });
-        }
-    } else {
-        return res.status(401).json({
-            error: 'Operation not permitted.'
-        });
-    }
+    const auth = await checkAuthorization(user_id, res);    
+    if (auth) return auth;
 
     const d = new Date(), m = d.getMonth() + 1, y = d.getFullYear();
     const {

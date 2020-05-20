@@ -6,7 +6,8 @@ module.exports = async function (req, res) {
     const { id } = req.params;
         
     const user_id = req.headers.authorization;
-    checkAuthorization(user_id, res);
+    const auth = await checkAuthorization(user_id, res);    
+    if (auth) return auth;
 
     if (id) {
         let validId;

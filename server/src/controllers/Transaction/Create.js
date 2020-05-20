@@ -14,7 +14,8 @@ module.exports = async function (req, res) {
 
     const user_id = req.headers.authorization;
 
-    checkAuthorization(user_id, res);
+    const auth = await checkAuthorization(user_id, res);    
+    if (auth) return auth;
 
     if (budget_id) {
         let validId;
