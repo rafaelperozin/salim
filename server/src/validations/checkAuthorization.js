@@ -1,7 +1,7 @@
 const connection = require('../database/connection');
 
 module.exports = async function checkAuthorization(user_id, res) {
-    if (user_id) {
+    if (user_id) {        
         const user = await connection('user')
             .where('id', user_id)
             .first();

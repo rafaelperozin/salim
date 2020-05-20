@@ -25,7 +25,6 @@ routes.put('/update/:id', celebrate({
                 value: Joi.number().positive().required(),
                 date: Joi.string().pattern(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/).required(),
                 status: Joi.string().valid('to pay', 'paid'),
-                user_id: Joi.string().hex().required(),
                 budget_id: Joi.number().integer().positive().required()
             })
         }), UpdateTransaction);

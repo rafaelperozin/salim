@@ -85,7 +85,7 @@ module.exports = async function (req, res) {
     res.header('X-Current-Total-Incomes-Paid', cur_incomes_paid);
     res.header('X-Current-Total-Expenses-To-Pay', cur_expenses_to_pay);
     res.header('X-Current-Total-Expenses-Paid', cur_expenses_paid);
-    res.header('X-Last-Total-Incomes-', last_incomes);
+    res.header('X-Last-Total-Incomes', last_incomes);
     res.header('X-Last-Total-Expenses', last_expenses);
     
     return res.json(transactions);

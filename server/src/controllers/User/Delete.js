@@ -1,5 +1,5 @@
 const checkAuthMaster = require('../../validations/checkAuthMaster');
-const checkId = require('../../validations/checkId')
+const checkId = require('../../validations/checkId');
 const connection = require('../../database/connection');
 
 module.exports = async function (req, res) {
