@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, ScrollView } from 'react-native';
-import { Header, Content, Form, Item, Picker } from 'native-base';
+import { Header, Content, Form, Item, Picker, Icon } from 'native-base';
 
 import logoImg from '../../assets/logo.png';
 
