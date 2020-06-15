@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, ScrollView } from 'react-native';
+import { View, Image, ScrollView, Text } from 'react-native';
 import { Header, Content, Form, Item, Picker, Icon } from 'native-base';
 
 import logoImg from '../../assets/logo.png';
@@ -13,7 +13,7 @@ export default function Budgets() {
             <ScrollView style={styles.scrollView}>
                 
                 <Header style={styles.header}>
-                    <Image source={logoImg} />
+                    <Image style={styles.logo} source={logoImg} />
 
                     <Form style={styles.form}>
                         <Item picker>
@@ -40,11 +40,16 @@ export default function Budgets() {
                 </Header>
                 
                 <View style={styles.hero}>
-                    
+                    <Text style={styles.heroTitle}>Balance</Text>
+                    <Text style={styles.heroValue}>£4,500.00</Text>
+                    <View style={styles.heroProgressBarBg}>
+                        <View style={[styles.heroProgressBar, { width: 200 }]}></View>
+                    </View>
+                    <Text style={styles.heroText}>£500.00 / £5,000.00</Text>
                 </View>
 
                 <Content style={styles.budgets}>
-                    
+                    <Text style={styles.pageTitle}>Budgets</Text>
                 </Content>
 
             </ScrollView>
