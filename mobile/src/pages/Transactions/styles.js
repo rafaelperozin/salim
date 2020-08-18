@@ -5,15 +5,20 @@ export default StyleSheet.create({
   container: {
     flex: 1
   },
-  header: {
+  budgets: {
+    paddingTop: 30,
+    paddingBottom: 70,
+    backgroundColor: "#fff"
+  },
+  pageTitle: {
+    color: "#1D1D1D",
+    fontSize: 24,
+    fontWeight: "bold"
+  },
+  contentHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#fff"
-  },
-  periodPicker: {
-    borderWidth: 1,
-    borderColor: "red",
-    width: 130
+    padding: 15
   }
 });
