@@ -1,15 +1,15 @@
 import React from 'react';
 import { Form, Item, Picker, Icon } from 'native-base';
 
-import styles from '../Period/styles';
+import { ThemeForm } from '../../styles/theme';
 
 export default function IntervalSelect() {
     return (
-        <Form style={styles.form}>
+        <Form style={ThemeForm.form}>
             <Item picker>
                 <Picker mode="dropdown" 
                     iosIcon={<Icon name="arrow-down" />} 
-                    style={styles.periodPicker} 
+                    style={ThemeForm.selectPicker} 
                     selectedValue="4"
                 >
                     <Picker.Item label="Quarterly" value="12" />

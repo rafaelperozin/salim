@@ -1,28 +1,30 @@
 import { StyleSheet } from "react-native";
 // import Constants from "expo-constants";
 
+import { Globals } from '../../styles/globals';
+
 export default StyleSheet.create({
   footerNav: {
     height: 58
   },
   footerNavTab: {
-    backgroundColor: "#fff"
+    backgroundColor: Globals.color.white
   },
   footerButton: {
-    backgroundColor: "#fff",
+    backgroundColor: Globals.color.white,
     borderRadius: 0,
     marginTop: -3
   },
   footerButtonActive: {
-    borderTopColor: "#2AA77C",
+    borderTopColor: Globals.color.midGreen,
     borderTopWidth: 2
   },
   footerBtnTxt: {
     fontSize: 16,
     lineHeight: 18,
-    color: "#666"
+    color: Globals.color.midGrey
   },
   footerBtnTxtActive: {
-    color: "#2AA77C"
+    color: Globals.color.midGreen
   }
 });

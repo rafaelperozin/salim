@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
-export default function FooterMenu() {
+export default function FooterMenu(props) {
 
     const navigation = useNavigation();
 
@@ -17,14 +17,14 @@ export default function FooterMenu() {
         <Footer style={styles.footerNav}>
             <FooterTab style={styles.footerNavTab}>
                 <Button
-                    style={[styles.footerButton, styles.footerButtonActive]}
+                    style={[styles.footerButton, props.current === 'Budgets' ? styles.footerButtonActive : '']}
                     onPress={() => { navigateToDestiny('Budgets') }}>
-                    <Text style={[styles.footerBtnTxt, styles.footerBtnTxtActive]}>Budgets</Text>
+                    <Text style={[styles.footerBtnTxt, props.current === 'Budgets' ? styles.footerBtnTxtActive : '']}>Budgets</Text>
                 </Button>
                 <Button
-                    style={styles.footerButton}
+                    style={[styles.footerButton, props.current === 'Transactions' ? styles.footerButtonActive : '']}
                     onPress={() => { navigateToDestiny('Transactions') }}>
-                    <Text style={styles.footerBtnTxt}>Cash Flow</Text>
+                    <Text style={[styles.footerBtnTxt, props.current === 'Transactions' ? styles.footerBtnTxtActive : '']}>Cash Flow</Text>
                 </Button>
             </FooterTab>
         </Footer>

@@ -3,7 +3,7 @@ import { View, ScrollView, Text } from 'react-native';
 import { Content, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
-import styles from './styles';
+import { Theme, ThemeButtons } from '../../styles/theme';
 
 import Header from '../../components/Header';
 import HeroBalance from '../../components/Balance';
@@ -20,16 +20,16 @@ export default function Budgets() {
     }
 
     return (
-        <View style={styles.container}>
-            <ScrollView style={styles.scrollView}>
+        <View style={Theme.container}>
+            <ScrollView style={Theme.scrollView}>
 
                 <Header />
                 
                 <HeroBalance />
 
-                <Content style={styles.budgets}>
-                    <View style={styles.contentHeader}>
-                        <Text style={styles.pageTitle}>Budgets</Text>
+                <Content style={Theme.content}>
+                    <View style={Theme.contentHeader}>
+                        <Text style={Theme.pageTitle}>Budgets</Text>
 
                         <IntervalSelect />
                         
@@ -37,13 +37,13 @@ export default function Budgets() {
 
                     <BudgetsList />
 
-                    <Button style={styles.primaryButton}><Text style={styles.buttonText}>Add Budget</Text></Button>
+                    <Button style={ThemeButtons.primary}><Text style={ThemeButtons.primaryText}>Add Budget</Text></Button>
                     
                 </Content>
                 
             </ScrollView>
 
-            <FooterMenu />
+            <FooterMenu current="Budgets" />
 
         </View>
     );

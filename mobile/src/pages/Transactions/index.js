@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, ScrollView, Text } from 'react-native';
-import { Content } from 'native-base';
+import { Content, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
+import { Theme, ThemeButtons } from '../../styles/theme';
 
 import Header from '../../components/Header';
-import IntervalSelect from '../../components/Interval';
 import FooterMenu from '../../components/Menu';
 
 export default function Budgets() {
@@ -18,16 +18,17 @@ export default function Budgets() {
     }
 
     return (
-        <View style={styles.container}>
-            <ScrollView style={styles.scrollView}>
+        <View style={Theme.container}>
+            <ScrollView style={Theme.scrollView}>
 
                 <Header />
 
-                <Content style={styles.budgets}>
-                    <View style={styles.contentHeader}>
-                        <Text style={styles.pageTitle}>Cash Flow</Text>
+                <Content style={Theme.content}>
+                    <View style={Theme.contentHeader}>
 
-                        <IntervalSelect />
+                        <Text style={Theme.pageTitle}>Cash Flow</Text>
+
+                        <Button style={ThemeButtons.simple}><Text style={ThemeButtons.simpleText}>+ New Transaction</Text></Button>
                         
                     </View>
                     
@@ -35,7 +36,7 @@ export default function Budgets() {
                 
             </ScrollView>
 
-            <FooterMenu />
+            <FooterMenu current="Transactions" />
 
         </View>
     );

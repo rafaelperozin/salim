@@ -1,22 +1,9 @@
 import { StyleSheet } from "react-native";
 // import Constants from "expo-constants";
 
+import { Globals } from '../../styles/globals';
+
 export default StyleSheet.create({
-  progressBarBg: {
-    borderRadius: 3,
-    width: "100%",
-    height: 6,
-    position: "relative"
-  },
-  progressBar: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    height: 6,
-    backgroundColor: "#4ADBA9",
-    borderRadius: 3,
-    width: 0
-  },
   contentBudgets: {
     padding: 15
   },
@@ -29,19 +16,19 @@ export default StyleSheet.create({
   },
   budgetProgressBarBg: {
     marginTop: 5,
-    backgroundColor: "#EBEBEB"
+    backgroundColor: Globals.color.lighterGrey
   },
   budgetTitle: {
     fontSize: 16,
-    color: "#1D1D1D",
+    color: Globals.color.darkGrey,
     marginBottom: 3
   },
   budgetSpent: {
     fontSize: 16,
-    color: "#7B7B7B"
+    color: Globals.color.midGrey
   },
   budgetAvailable: {
     fontSize: 16,
-    color: "#7B7B7B"
+    color: Globals.color.midGrey
   }
 });
