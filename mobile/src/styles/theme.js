@@ -92,3 +92,18 @@ export const ThemeProgressBar = StyleSheet.create({
     width: 0
   }
 });
+
+export const ThemeValueSign = StyleSheet.create({
+  negativeValue: {
+
+  },
+  negativeText: {
+
+  },
+  positiveValue: {
+    
+  },
+  positiveText: {
+    
+  }
+});
