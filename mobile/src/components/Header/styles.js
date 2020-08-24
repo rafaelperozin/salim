@@ -15,5 +15,13 @@ export default StyleSheet.create({
     height: 36,
     width: 83,
     marginLeft: 5
+  },
+  backButton: {
+    width: "auto",
+    textAlign: "right",
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10
   }
 });

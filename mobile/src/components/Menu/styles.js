@@ -13,7 +13,8 @@ export default StyleSheet.create({
   footerButton: {
     backgroundColor: Globals.color.white,
     borderRadius: 0,
-    marginTop: -3
+    borderTopWidth: 2,
+    borderTopColor: Globals.color.white
   },
   footerButtonActive: {
     borderTopColor: Globals.color.midGreen,
@@ -21,7 +22,6 @@ export default StyleSheet.create({
   },
   footerBtnTxt: {
     fontSize: 16,
-    lineHeight: 18,
     color: Globals.color.midGrey
   },
   footerBtnTxtActive: {

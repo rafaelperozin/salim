@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 import { ThemeProgressBar } from '../../styles/theme';
 
-export default function Budgets() {
+export default function HeroBalance() {
     return (
         <View style={styles.hero}>
             <Text style={styles.heroTitle}>Balance</Text>

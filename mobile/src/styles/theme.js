@@ -9,7 +9,7 @@ export const Theme = StyleSheet.create({
     backgroundColor: Globals.color.white
   },
   content: {
-    paddingTop: 30,
+    paddingTop: 15,
     paddingBottom: 70,
     backgroundColor: Globals.color.white,
     marginTop: -1
