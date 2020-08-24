@@ -93,17 +93,20 @@ export const ThemeProgressBar = StyleSheet.create({
   }
 });
 
-export const ThemeValueSign = StyleSheet.create({
-  negativeValue: {
-
+export const ThemeStatus = StyleSheet.create({
+  paid: {
+    opacity: 0.4
   },
-  negativeText: {
-
+  overdue: {
+    color: Globals.color.midYellow
   },
-  positiveValue: {
-    
+  overdueBackground: {
+    backgroundColor: Globals.color.lightYellow
   },
-  positiveText: {
-    
+  negative: {
+    color: Globals.color.midRed
+  },
+  positive: {
+    color: Globals.color.midGreen
   }
 });
