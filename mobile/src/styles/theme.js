@@ -47,7 +47,9 @@ export const ThemeButtons = StyleSheet.create({
     width: "100%"
   },
   simple: {
-    backgroundColor: "none"
+    backgroundColor: Globals.color.white,
+    elevation: 0,
+    width: 120
   },
   simpleText: {
     textAlign: "center",
@@ -63,15 +65,31 @@ export const ThemeForm = StyleSheet.create({
   form: {
     marginRight: 5
   },
-  selectPicker: {
+  inputContainer: {
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderTopWidth: 0,
-    borderBottom: "1px solid " + Globals.color.midGrey,
+    borderBottomWidth: 1,
+    borderBottomColor: Globals.color.midGrey
+  },
+  selectPicker: {
     width: 130,
     fontSize: 14,
     color: Globals.color.midGrey,
-    height: 34
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 5,
+    paddingRight: 5,
+  },
+  input: {
+    backgroundColor: Globals.color.white,
+    fontSize: 14,
+    color: Globals.color.midGrey,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 5,
+    paddingRight: 5,
+    width: "100%"
   }
 });
 

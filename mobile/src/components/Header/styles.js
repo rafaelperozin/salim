@@ -22,6 +22,7 @@ export default StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    color: Globals.color.midGrey
   }
 });

@@ -8,13 +8,14 @@ export default StyleSheet.create({
     height: 58
   },
   footerNavTab: {
-    backgroundColor: Globals.color.white
+    backgroundColor: Globals.color.white,
   },
   footerButton: {
     backgroundColor: Globals.color.white,
     borderRadius: 0,
     borderTopWidth: 2,
-    borderTopColor: Globals.color.white
+    borderTopColor: Globals.color.white,
+    marginTop: -3
   },
   footerButtonActive: {
     borderTopColor: Globals.color.midGreen,

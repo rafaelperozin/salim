@@ -11,28 +11,30 @@ export default StyleSheet.create({
     },
     transactionContainer: {
         width: "100%",
-        flexDirection: "Row",
+        flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "center",
-        marginTop: 10,
-        paddingBottom: 10,
+        marginTop: 5,
+        paddingBottom: 5,
         borderBottomWidth: 1,
-        borderBottomColor: Globals.color.lightGrey
+        borderBottomColor: Globals.color.lighterGrey
     },
     transactionBackground: {
         width: "100%",
-        flexDirection: "Row",
+        flexDirection: "row",
         justifyContent: "flex-start",
-        alignItems: "center"
+        alignItems: "center",
+        paddingTop: 5,
+        paddingBottom: 5
     },
     transactionsAmountTitle: {
         flexGrow: 1,
-        fontWeight: 700,
+        fontWeight: "700",
         color: Globals.color.midGrey,
         fontSize: 14
     },
     transactionsAmountValue: {
-        fontWeight: 700,
+        fontWeight: "700",
         color: Globals.color.midGrey,
         fontSize: 14
     },

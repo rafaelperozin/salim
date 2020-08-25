@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Item, Picker, Icon } from 'native-base';
 
+import styles from './styles';
 import { ThemeForm } from '../../styles/theme';
 
 export default function PeriodSelect () {
@@ -9,7 +10,7 @@ export default function PeriodSelect () {
             <Item picker>
                 <Picker mode="dropdown" 
                     iosIcon={<Icon name="arrow-down" />} 
-                    style={ThemeForm.selectPicker} 
+                    style={[ThemeForm.selectPicker, styles.picker]} 
                     selectedValue="3"
                 >
                     <Picker.Item label="January" value="1" />

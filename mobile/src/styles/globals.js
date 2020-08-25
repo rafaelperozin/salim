@@ -1,6 +1,6 @@
 export const Globals = {
     color: {
-        white: "#FFF",
+        white: "#FFFFFF",
         lighterGrey: "#EBEBEB",
         lightGrey: "#C3C3C3",
         midGrey: "#7B7B7B",

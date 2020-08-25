@@ -4,23 +4,25 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 import { ThemeStatus } from '../../styles/theme';
 
-import CheckIcon from '@material-ui/icons/Check';
-import WarningIcon from '@material-ui/icons/Warning';
+// import CheckIcon from '@material-ui/icons/Check';
+// import WarningIcon from '@material-ui/icons/Warning';
 
 export default function TransactionsList() {
     return (
         <View style={styles.transactions}>
 
             <View style={[styles.transactionContainer, styles.transactionsAmount]}>
-                <Text style={styles.transactionsAmountTitle}>Previews Period Balance</Text>
-                <Text style={[styles.transactionsAmountValue, ThemeStatus.positive]}>+£504.90</Text>
+                <View style={styles.transactionBackground}>
+                    <Text style={styles.transactionsAmountTitle}>Previews Period Balance</Text>
+                    <Text style={[styles.transactionsAmountValue, ThemeStatus.positive]}>+£504.90</Text>
+                </View>
             </View>
 
             <View style={styles.transactionsList}>
                 <View style={styles.transactionContainer} transaction-type="Expense">
                     <View style={styles.transactionBackground}>
                         <View style={styles.transactionStatus}>
-                            <CheckIcon style={{fontSize: 18}} />
+                            {/* <CheckIcon style={{fontSize: 18}} /> */}
                         </View>
                         <View style={[styles.transactionBudget, ThemeStatus.paid]}>
                             <Text style={styles.transactionBudgetName}>Groceries</Text>
@@ -32,7 +34,7 @@ export default function TransactionsList() {
                 <View style={styles.transactionContainer} transaction-type="Income">
                     <View style={[styles.transactionBackground, ThemeStatus.overdueBackground]}>
                         <View style={[styles.transactionStatus, ThemeStatus.overdue]}>
-                            <WarningIcon style={{fontSize: 18}} />
+                            {/* <WarningIcon style={{fontSize: 18}} /> */}
                         </View>
                         <View style={[styles.transactionBudget, styles.negativeTransBudget]}>
                             <Text style={[styles.transactionBudgetName, styles.negativeTransBudgetName]}>Groceries</Text>
@@ -64,8 +66,10 @@ export default function TransactionsList() {
             </View>
 
             <View style={[styles.transactionContainer, styles.transactionsAmount]}>
-                <Text style={styles.transactionsAmountTitle}>Current Period Balance</Text>
-                <Text style={[styles.transactionsAmountValue, ThemeStatus.negative]}>-£504.90</Text>
+                <View style={styles.transactionBackground}>
+                    <Text style={styles.transactionsAmountTitle}>Current Period Balance</Text>
+                    <Text style={[styles.transactionsAmountValue, ThemeStatus.negative]}>-£504.90</Text>
+                </View>
             </View>
 
         </View>

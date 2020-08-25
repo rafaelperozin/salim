@@ -16,7 +16,10 @@ export default StyleSheet.create({
         paddingBottom: 5,
         flexGrow: 1,
         marginRight: 20,
-        height: 35
+        height: 35,
+        elevation: 0,
+        width: "20%",
+        borderRadius: 0
     },
     selectedTab: {
         borderBottomColor: Globals.color.midGreen,
