@@ -1,41 +1,42 @@
 import { StyleSheet } from "react-native";
 // import Constants from "expo-constants";
 
-import { Globals } from '../../styles/globals';
-
 export default StyleSheet.create({
-    form: {
-        paddingRight: 15,
-        paddingLeft: 15,
-        marginTop: 10
-    },
-    type: {
-        width: 115
-    },
-    picker: {
-        fontSize: 18
-    },
     field: {
         marginTop: 20,
         flexDirection: "row",
         alignItems: "center"
     },
-    input: {
-        fontSize: 18
+    type: {
+        width: 130
     },
     value: {
-        width: 185
-    },
-    egLabel: {
-        fontSize: 13,
-        fontStyle: "italic",
-        color: Globals.color.lightGrey,
-        marginLeft: 20
-    },
-    day: {
-        width: 60
+        width: 197
     },
     budget: {
-        width: 150
+        width: 197
+    },
+    budgetSelect: {
+        width: 197
+    },
+    day: {
+        width: 60,
+        marginRight: 10
+    },
+    month: {
+        marginRight: 10
+    },
+    repeater: {
+        paddingTop: 10,
+        paddingBottom: 10
+    },
+    label: {
+        marginLeft: 10
+    },
+    info: {
+        marginLeft: 5
+    },
+    button: {
+        marginTop: 60
     }
 });

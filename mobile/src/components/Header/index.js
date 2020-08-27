@@ -23,7 +23,7 @@ export default function CustomHeader(props) {
             <Image style={styles.logo} source={logoImg} />
 
             {props.navigation === 'back' &&
-                <Text style={ThemeButtons.simpleText, styles.backButton} onPress={() => { navigateToDestiny('Transactions') }}>&lt; Back</Text>
+                <Text style={ThemeButtons.simpleText, styles.backButton} onPress={() => { navigateToDestiny(props.destiny) }}>&lt; Back</Text>
             }
 
             {props.navigation === 'period' &&

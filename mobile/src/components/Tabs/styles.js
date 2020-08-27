@@ -8,8 +8,6 @@ export default StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         flexWrap: "nowrap",
-        paddingLeft: 15,
-        paddingRight: 15
     },
     tabButton: {
         backgroundColor: Globals.color.white,

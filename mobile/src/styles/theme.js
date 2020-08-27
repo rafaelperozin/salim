@@ -10,6 +10,8 @@ export const Theme = StyleSheet.create({
   },
   content: {
     paddingTop: 15,
+    paddingLeft: 15,
+    paddingRight: 15,
     paddingBottom: 70,
     backgroundColor: Globals.color.white,
     marginTop: -1
@@ -24,7 +26,11 @@ export const Theme = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 15
+    paddingTop: 15,
+    paddingBottom: 30
+  },
+  alignCenter: {
+    alignItems: "center"
   }
 });
 
@@ -32,15 +38,13 @@ export const ThemeButtons = StyleSheet.create({
   primary: {
     height: 62,
     borderRadius: 5,
-    backgroundColor: Globals.color.lighterGrey,
+    backgroundColor: Globals.color.midGreen,
     marginTop: 30,
-    marginRight: 15,
-    marginLeft: 15,
     marginBottom: 10
   },
   primaryText: {
     textAlign: "center",
-    color: Globals.color.midGrey,
+    color: Globals.color.white,
     fontSize: 16,
     lineHeight: 18,
     fontWeight: "600",
@@ -53,7 +57,7 @@ export const ThemeButtons = StyleSheet.create({
   },
   simpleText: {
     textAlign: "center",
-    color: Globals.color.midGrey,
+    color: Globals.color.midGreen,
     fontSize: 14,
     lineHeight: 16,
     fontWeight: "400",
@@ -62,34 +66,43 @@ export const ThemeButtons = StyleSheet.create({
 });
 
 export const ThemeForm = StyleSheet.create({
-  form: {
-    marginRight: 5
-  },
-  inputContainer: {
+  fieldContainer: {
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderTopWidth: 0,
     borderBottomWidth: 1,
-    borderBottomColor: Globals.color.midGrey
+    borderBottomColor: Globals.color.midGrey,
+    overflow: "hidden",
+    height: 51
   },
-  selectPicker: {
+  select: {
     width: 130,
-    fontSize: 14,
+    fontSize: 18,
     color: Globals.color.midGrey,
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 5,
-    paddingRight: 5,
+    paddingRight: 5
   },
   input: {
     backgroundColor: Globals.color.white,
-    fontSize: 14,
+    fontSize: 18,
     color: Globals.color.midGrey,
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 11,
+    paddingBottom: 11,
     paddingLeft: 5,
     paddingRight: 5,
     width: "100%"
+  },
+  example: {
+    fontSize: 13,
+    fontStyle: "italic",
+    color: Globals.color.lightGrey,
+    marginLeft: 20
+  },
+  label: {
+    fontSize: 18,
+    color: Globals.color.midGrey
   }
 });
 

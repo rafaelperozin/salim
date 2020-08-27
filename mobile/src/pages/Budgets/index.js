@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import { Content, Button } from 'native-base';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Theme, ThemeButtons } from '../../styles/theme';
 
@@ -13,11 +13,11 @@ import FooterMenu from '../../components/Menu';
 
 export default function Budgets() {
 
-    // const navigation = useNavigation();
+    const navigation = useNavigation();
 
-    // function navigateToDetail() {
-    //     navigation.navigate('Transactions');
-    // }
+    function navigateToDestiny(destiny) {
+        navigation.navigate(destiny);
+    }
 
     return (
         <View style={Theme.container}>
@@ -37,7 +37,14 @@ export default function Budgets() {
 
                     <BudgetsList />
 
-                    <Button style={ThemeButtons.primary}><Text style={ThemeButtons.primaryText}>Add Budget</Text></Button>
+                    <View style={Theme.alignCenter}>
+                        <Button
+                            style={ThemeButtons.simple}
+                            onPress={() => { navigateToDestiny('NewBudget') }}
+                        >
+                            <Text style={ThemeButtons.simpleText}>+ Add Budget</Text>
+                        </Button>
+                    </View>
                     
                 </Content>
                 

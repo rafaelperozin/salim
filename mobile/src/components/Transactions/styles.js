@@ -5,9 +5,7 @@ import { Globals } from '../../styles/globals';
 
 export default StyleSheet.create({
     transactions: {
-        marginTop: 25,
-        paddingLeft: 15,
-        paddingRight: 15
+        marginTop: 25
     },
     transactionContainer: {
         width: "100%",
