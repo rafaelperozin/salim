@@ -25,7 +25,7 @@ routes.put('/update/:id', celebrate({
                 name: Joi.string().required(),
                 mobile: Joi.string().min(10).max(13).pattern(/^[0-9]+$/).required(),
                 city: Joi.string().required(),
-                country: Joi.string().required().length(2),
+                country: Joi.string().length(2).required(),
             })
         }), UpdateUser);
 

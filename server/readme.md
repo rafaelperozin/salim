@@ -8,7 +8,7 @@ Send the body as a JSON.
 # User
 ### Routers
 - LIST: `/user/`
-- CREATE: `/user/register`
+- CREATE: `/user/new`
 - UPDATE: `/user/update/{{uniq_id}}`
 - DELETE: `/user/delete/{{uniq_id}}`
 - GET User: `/user/{{uniq_id}}`
@@ -27,7 +27,7 @@ All fields are required
 
 # Budget
 - LIST: `/budget/`
-- CREATE: `/budget/register`
+- CREATE: `/budget/new`
 - UPDATE: `/budget/update/{{uniq_id}}`
 - DELETE: `/budget/delete/{{uniq_id}}`
 - GET Budget: `/budget/{{uniq_id}}`
@@ -57,7 +57,7 @@ If you do not use parameters to filter by date the API will return filtered by t
 
 # Transaction
 - LIST: /transaction/
-- CREATE: /transaction/register
+- CREATE: /transaction/new
 - UPDATE: /transaction/update/{{uniq_id}}
 - DELETE: /transaction/delete/{{uniq_id}}
 - GET Transaction: /transaction/{{uniq_id}}
