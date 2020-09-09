@@ -1,5 +1,9 @@
 const generateUniqueId = require('../../utils/generateUniqueId');
 const connection = require('../../database/connection');
+const errorMessages = require('../../utils/errorMessages');
+
+const duplicatedMessage = errorMessages.users.duplicated.message;
+const duplicatedCode = errorMessages.users.duplicated.code;
 
 module.exports = async function (req, res) {
 
@@ -15,8 +19,8 @@ module.exports = async function (req, res) {
         .where('mobile', mobile)
         .first();
     if (usedMobile) {
-        return res.status(412).json({
-            error: `Already exist a user with this mobile number: ${mobile}`
+        return res.status(duplicatedCode).json({
+            error: duplicatedMessage
         });
     }
 
