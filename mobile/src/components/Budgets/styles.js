@@ -18,7 +18,8 @@ export default StyleSheet.create({
   budgetTitle: {
     fontSize: 16,
     color: Globals.color.darkGrey,
-    marginBottom: 3
+    marginBottom: 3,
+    textTransform: 'capitalize'
   },
   budgetSpent: {
     fontSize: 16,

@@ -3,6 +3,7 @@ import { View, ScrollView, Text } from 'react-native';
 import { Content, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
+import styles from './styles';
 import { Theme, ThemeButtons } from '../../styles/theme';
 
 import CustomHeader from '../../components/Header';
@@ -35,7 +36,9 @@ export default function Budgets() {
                         
                     </View>
 
-                    <BudgetsList />
+                    <View style={styles.contentBudgets}>
+                        <BudgetsList />
+                    </View>
 
                     <View style={Theme.alignCenter}>
                         <Button

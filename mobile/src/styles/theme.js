@@ -77,8 +77,6 @@ export const ThemeForm = StyleSheet.create({
   },
   select: {
     width: 130,
-    fontSize: 18,
-    color: Globals.color.midGrey,
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 5,
