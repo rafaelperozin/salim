@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Image, Text } from 'react-native';
 import { Header } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
@@ -10,26 +10,30 @@ import { ThemeButtons } from '../../styles/theme';
 
 import PeriodSelect from '../../components/Period';
 
-export default function CustomHeader(props) {
-
-    const navigation = useNavigation();
-    function navigateToDestiny(destiny) {
+class CustomHeader extends Component {
+    
+    navigateToDestiny(destiny) {
+        const navigation = useNavigation();
         navigation.navigate(destiny);
     }
 
-    return (
-        <Header style={styles.header}>
-            
-            <Image style={styles.logo} source={logoImg} />
+    render() {
+        return (
+            <Header style={styles.header}>
+                
+                <Image style={styles.logo} source={logoImg} />
 
-            {props.navigation === 'back' &&
-                <Text style={ThemeButtons.simpleText, styles.backButton} onPress={() => { navigateToDestiny(props.destiny) }}>&lt; Back</Text>
-            }
+                {this.props.navigation === 'back' &&
+                    <Text style={ThemeButtons.simpleText, styles.backButton} onPress={() => { navigateToDestiny(this.props.destiny) }}>&lt; Back</Text>
+                }
 
-            {props.navigation === 'period' &&
-                <PeriodSelect />
-            }
+                {this.props.navigation === 'period' &&
+                    <PeriodSelect parentCallback={this.props.parentCallback} />
+                }
 
-        </Header>
-    );
+            </Header>
+        );
+    }
 }
+
+export default CustomHeader;

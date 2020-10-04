@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import { Content, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
@@ -8,53 +8,84 @@ import { Theme, ThemeButtons } from '../../styles/theme';
 
 import CustomHeader from '../../components/Header';
 import HeroBalance from '../../components/Balance';
-import IntervalSelect from '../../components/Interval';
 import BudgetsList from '../../components/Budgets';
 import FooterMenu from '../../components/Menu';
+// import IntervalSelect from '../../components/Interval';
 
-export default function Budgets() {
+class Budgets extends Component {
 
-    const navigation = useNavigation();
+    state = {
+        balance: {
+            value: "",
+            budget: "",
+            total: ""
+        },
+        period: new Date().getMonth() + 1,
+    }
 
-    function navigateToDestiny(destiny) {
+    getDataFromBudgetsList = data => {
+        this.setState({
+            balance: {
+                value: data.balance,
+                budget: data.budget,
+                total: data.total,
+            }
+        });
+    }
+
+    getDataFromPeriod = newPeriod => {
+        this.setState({
+            period: newPeriod
+        });
+    }
+
+    navigateToDestiny(destiny) {
+        const navigation = useNavigation();
         navigation.navigate(destiny);
     }
 
-    return (
-        <View style={Theme.container}>
-            <ScrollView style={Theme.scrollView}>
+    render() {
 
-                <CustomHeader navigation="period" />
-                
-                <HeroBalance />
+        const { budget, balance, period } = this.state;
 
-                <Content style={Theme.content}>
-                    <View style={Theme.contentHeader}>
-                        <Text style={Theme.pageTitle}>Budgets</Text>
+        return (
+            <View style={Theme.container}>
+                <ScrollView style={Theme.scrollView}>
 
-                        <IntervalSelect />
-                        
-                    </View>
-
-                    <View style={styles.contentBudgets}>
-                        <BudgetsList />
-                    </View>
-
-                    <View style={Theme.alignCenter}>
-                        <Button
-                            style={ThemeButtons.simple}
-                            onPress={() => { navigateToDestiny('NewBudget') }}
-                        >
-                            <Text style={ThemeButtons.simpleText}>+ Add Budget</Text>
-                        </Button>
-                    </View>
+                    <CustomHeader navigation="period" parentCallback={this.getDataFromPeriod} />
                     
-                </Content>
-                
-            </ScrollView>
+                    <HeroBalance data={balance} />
 
-            <FooterMenu current="Budgets" />
+                    <Content style={Theme.content}>
+                        <View style={Theme.contentHeader}>
+                            <Text style={Theme.pageTitle}>Budgets</Text>
 
-        </View>
-    );
+                            {/* <IntervalSelect /> Need to change api to set interval */}
+                            
+                        </View>
+
+                        <View style={styles.contentBudgets}>
+                            <BudgetsList parentCallback={this.getDataFromBudgetsList} period={period} />
+                        </View>
+
+                        <View style={Theme.alignCenter}>
+                            <Button
+                                style={ThemeButtons.simple}
+                                onPress={() => { navigateToDestiny('NewBudget') }}
+                            >
+                                <Text style={ThemeButtons.simpleText}>+ Add Budget {budget}</Text>
+                            </Button>
+                        </View>
+                        
+                    </Content>
+                    
+                </ScrollView>
+
+                <FooterMenu current="Budgets" />
+
+            </View>
+        )
+    }
 }
+
+export default Budgets;
